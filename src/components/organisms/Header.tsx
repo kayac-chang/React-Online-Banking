@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { MdClose } from "react-icons/md";
+import { Close } from "components/atoms/Button";
 
 function Title({ children }: PropsWithChildren<{}>) {
   return (
@@ -12,9 +12,7 @@ function Title({ children }: PropsWithChildren<{}>) {
 function Control() {
   return (
     <div className="absolute top-0 left-0 w-full h-full flex justify-end items-center px-2">
-      <button className="text-3xl">
-        <MdClose />
-      </button>
+      <Close className="text-3xl" />
     </div>
   );
 }
