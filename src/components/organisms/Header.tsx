@@ -17,10 +17,13 @@ function Control() {
   );
 }
 
-export default function Header() {
+type Props = {
+  title?: string;
+};
+export default function Header({ title = "" }: Props) {
   return (
     <header className="h-14 bg-gray-500 text-white relative">
-      <Title>轉入對象</Title>
+      <Title>{title}</Title>
 
       <Control />
     </header>

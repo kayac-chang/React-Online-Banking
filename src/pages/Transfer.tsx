@@ -1,9 +1,9 @@
 import Header from "components/organisms/Header";
 
-export default function Home() {
+export default function Transfer() {
   return (
     <>
-      <Header />
+      <Header title="轉入對象" />
     </>
   );
 }

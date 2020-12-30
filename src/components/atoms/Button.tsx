@@ -1,9 +1,9 @@
 import { MdClose } from "react-icons/md";
 
-type Button = {
+type ButtonProps = {
   className?: string;
 };
-export function Close(props: Button) {
+export function Close(props: ButtonProps) {
   return (
     <button {...props}>
       <MdClose />
