@@ -1,31 +1,33 @@
-import { PropsWithChildren } from "react";
+import clsx from "clsx";
+
 import { Close } from "components/atoms/Button";
-
-function Title({ children }: PropsWithChildren<{}>) {
-  return (
-    <h1 className="h-full flex justify-center items-center text-xl">
-      {children}
-    </h1>
-  );
-}
-
-function Control() {
-  return (
-    <div className="absolute top-0 left-0 w-full h-full flex justify-end items-center px-2">
-      <Close className="text-3xl" />
-    </div>
-  );
-}
 
 type Props = {
   title?: string;
+  align?: "start" | "end" | "center";
+  close?: boolean;
 };
-export default function Header({ title = "" }: Props) {
+export default function Header({
+  title = "",
+  align = "center",
+  close = false,
+}: Props) {
   return (
-    <header className="h-14 bg-gray-500 text-white relative">
-      <Title>{title}</Title>
+    <header className="h-14 relative">
+      <hgroup
+        className={clsx(
+          "h-full flex items-end p-4 space-x-4",
+          `justify-${align}`
+        )}
+      >
+        <h1 className="text-xl">{title}</h1>
 
-      <Control />
+        <h2 className="text-xs py-px">點選好友快速轉帳</h2>
+      </hgroup>
+
+      <div className="absolute top-0 left-0 w-full h-full flex justify-end items-center px-2">
+        {close && <Close className="text-3xl" />}
+      </div>
     </header>
   );
 }

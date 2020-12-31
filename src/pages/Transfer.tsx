@@ -132,7 +132,7 @@ export default function Transfer() {
 
   return (
     <div className="h-screen flex flex-col">
-      <Header title="轉入對象" />
+      <Header title="轉入對象" close />
 
       <nav className="flex divide-x border h-16">
         <NavBtn label="輸入帳戶" icon={<BsPlusCircle />} />
