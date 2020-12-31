@@ -8,7 +8,9 @@ type Props = {
 };
 export default function Avatar({ img, name, className, showName }: Props) {
   return (
-    <figure className={clsx("inline-flex flex-col items-center", className)}>
+    <figure
+      className={clsx("inline-flex flex-col items-center space-y-1", className)}
+    >
       <img className="rounded-full" src={img} alt={`${name}'s avatar`} />
 
       {showName && <figcaption className="text-xs">{name}</figcaption>}

@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
 import { BsPlusCircle, BsCheckCircle, BsBootstrap } from "react-icons/bs";
-import { getViewPort } from "utils";
-import { PropsWithChildren } from "react";
+import { fillRemainHeight } from "utils";
 
 import Header from "components/organisms/Header";
+import Section from "components/organisms/Section";
 import Record from "components/molecules/Record";
 import Avatar from "components/atoms/Avatar";
 import { NavBtn } from "components/atoms/Button";
@@ -19,7 +19,6 @@ import Avatar_08 from "assets/avatar/08.png";
 import Avatar_09 from "assets/avatar/09.png";
 import Avatar_10 from "assets/avatar/10.png";
 import Avatar_11 from "assets/avatar/11.png";
-import { Link } from "react-router-dom";
 
 const friends = [
   { img: Avatar_01, name: "Jermey123" },
@@ -92,44 +91,7 @@ const records = [
   },
 ];
 
-type Props = {
-  title?: string;
-  more?: boolean;
-  className?: string;
-};
-function Section({
-  title = "",
-  more = false,
-  className,
-  children,
-}: PropsWithChildren<Props>) {
-  return (
-    <section className={className}>
-      <header className="flex justify-between items-center bg-gray-500 text-white h-8 px-4">
-        <h2>{title}</h2>
-
-        {more && (
-          <Link to="friends">
-            <span className="text-xs underline">更多</span>
-          </Link>
-        )}
-      </header>
-
-      {children}
-    </section>
-  );
-}
-
 export default function Transfer() {
-  function fitContent(el: HTMLDivElement) {
-    if (!el) return;
-
-    const viewport = getViewPort();
-    const { top } = el.getBoundingClientRect();
-
-    el.style.height = viewport.height - top + "px";
-  }
-
   return (
     <div className="h-screen flex flex-col">
       <Header title="轉入對象" close />
@@ -155,7 +117,7 @@ export default function Transfer() {
       </Section>
 
       <Section className="flex-1" title="最近紀錄">
-        <div className="divide-y overflow-y-auto" ref={fitContent}>
+        <div className="divide-y overflow-y-auto" ref={fillRemainHeight}>
           {records.map(({ id, name, img, date }, index) => (
             <Record key={index} id={id} name={name} img={img} date={date} />
           ))}

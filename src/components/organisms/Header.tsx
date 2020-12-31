@@ -1,14 +1,15 @@
 import clsx from "clsx";
-
 import { Close } from "components/atoms/Button";
 
 type Props = {
   title?: string;
+  subTitle?: string;
   align?: "start" | "end" | "center";
   close?: boolean;
 };
 export default function Header({
   title = "",
+  subTitle = "",
   align = "center",
   close = false,
 }: Props) {
@@ -22,7 +23,7 @@ export default function Header({
       >
         <h1 className="text-xl">{title}</h1>
 
-        <h2 className="text-xs py-px">點選好友快速轉帳</h2>
+        {subTitle && <h2 className="text-xs py-px">{subTitle}</h2>}
       </hgroup>
 
       <div className="absolute top-0 left-0 w-full h-full flex justify-end items-center px-2">
