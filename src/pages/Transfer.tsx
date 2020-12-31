@@ -1,8 +1,9 @@
 import dayjs from "dayjs";
 import { BsPlusCircle, BsCheckCircle, BsBootstrap } from "react-icons/bs";
+import { getViewPort } from "utils";
+import { PropsWithChildren } from "react";
 
 import Header from "components/organisms/Header";
-import Section from "components/molecules/Section";
 import Record from "components/molecules/Record";
 import Avatar from "components/atoms/Avatar";
 import { NavBtn } from "components/atoms/Button";
@@ -18,80 +19,108 @@ import Avatar_08 from "assets/avatar/08.png";
 import Avatar_09 from "assets/avatar/09.png";
 import Avatar_10 from "assets/avatar/10.png";
 import Avatar_11 from "assets/avatar/11.png";
-import { getViewPort } from "utils";
+import { Link } from "react-router-dom";
+
+const friends = [
+  { img: Avatar_01, name: "Jermey123" },
+  { img: Avatar_02, name: "Cindy 888" },
+  { img: Avatar_03, name: "Elli.H" },
+  { img: Avatar_04, name: "Bruce J" },
+  { img: Avatar_05, name: "KM" },
+];
+
+const records = [
+  {
+    id: "38000009393",
+    name: "Robert Fox",
+    img: Avatar_06,
+    date: dayjs().format("YYYY/MM/DD"),
+  },
+  {
+    id: "38000009393",
+    name: "Robert Fox",
+    img: Avatar_07,
+    date: dayjs().format("YYYY/MM/DD"),
+  },
+  {
+    id: "38000009393",
+    name: "Robert Fox",
+    img: Avatar_08,
+    date: dayjs().format("YYYY/MM/DD"),
+  },
+  {
+    id: "38000009393",
+    name: "Robert Fox",
+    img: Avatar_09,
+    date: dayjs().format("YYYY/MM/DD"),
+  },
+  {
+    id: "38000009393",
+    name: "Robert Fox",
+    img: Avatar_10,
+    date: dayjs().format("YYYY/MM/DD"),
+  },
+  {
+    id: "38000009393",
+    name: "Robert Fox",
+    img: Avatar_11,
+    date: dayjs().format("YYYY/MM/DD"),
+  },
+  {
+    id: "38000009393",
+    name: "Robert Fox",
+    img: Avatar_09,
+    date: dayjs().format("YYYY/MM/DD"),
+  },
+  {
+    id: "38000009393",
+    name: "Robert Fox",
+    img: Avatar_09,
+    date: dayjs().format("YYYY/MM/DD"),
+  },
+  {
+    id: "38000009393",
+    name: "Robert Fox",
+    img: Avatar_09,
+    date: dayjs().format("YYYY/MM/DD"),
+  },
+  {
+    id: "38000009393",
+    name: "Robert Fox",
+    img: Avatar_09,
+    date: dayjs().format("YYYY/MM/DD"),
+  },
+];
+
+type Props = {
+  title?: string;
+  more?: boolean;
+  className?: string;
+};
+function Section({
+  title = "",
+  more = false,
+  className,
+  children,
+}: PropsWithChildren<Props>) {
+  return (
+    <section className={className}>
+      <header className="flex justify-between items-center bg-gray-500 text-white h-8 px-4">
+        <h2>{title}</h2>
+
+        {more && (
+          <Link to="friends">
+            <span className="text-xs underline">更多</span>
+          </Link>
+        )}
+      </header>
+
+      {children}
+    </section>
+  );
+}
 
 export default function Transfer() {
-  const friends = [
-    { img: Avatar_01, name: "Jermey123" },
-    { img: Avatar_02, name: "Cindy 888" },
-    { img: Avatar_03, name: "Elli.H" },
-    { img: Avatar_04, name: "Bruce J" },
-    { img: Avatar_05, name: "KM" },
-  ];
-
-  const records = [
-    {
-      id: "38000009393",
-      name: "Robert Fox",
-      img: Avatar_06,
-      date: dayjs().format("YYYY/MM/DD"),
-    },
-    {
-      id: "38000009393",
-      name: "Robert Fox",
-      img: Avatar_07,
-      date: dayjs().format("YYYY/MM/DD"),
-    },
-    {
-      id: "38000009393",
-      name: "Robert Fox",
-      img: Avatar_08,
-      date: dayjs().format("YYYY/MM/DD"),
-    },
-    {
-      id: "38000009393",
-      name: "Robert Fox",
-      img: Avatar_09,
-      date: dayjs().format("YYYY/MM/DD"),
-    },
-    {
-      id: "38000009393",
-      name: "Robert Fox",
-      img: Avatar_10,
-      date: dayjs().format("YYYY/MM/DD"),
-    },
-    {
-      id: "38000009393",
-      name: "Robert Fox",
-      img: Avatar_11,
-      date: dayjs().format("YYYY/MM/DD"),
-    },
-    {
-      id: "38000009393",
-      name: "Robert Fox",
-      img: Avatar_09,
-      date: dayjs().format("YYYY/MM/DD"),
-    },
-    {
-      id: "38000009393",
-      name: "Robert Fox",
-      img: Avatar_09,
-      date: dayjs().format("YYYY/MM/DD"),
-    },
-    {
-      id: "38000009393",
-      name: "Robert Fox",
-      img: Avatar_09,
-      date: dayjs().format("YYYY/MM/DD"),
-    },
-    {
-      id: "38000009393",
-      name: "Robert Fox",
-      img: Avatar_09,
-      date: dayjs().format("YYYY/MM/DD"),
-    },
-  ];
-
   function fitContent(el: HTMLDivElement) {
     if (!el) return;
 
