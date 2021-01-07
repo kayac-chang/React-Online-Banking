@@ -3,8 +3,8 @@ import { Avator } from "types";
 import { map } from "ramda";
 
 import Avatar from "components/base/atoms/Avatar";
-import SearchField from "components/base/molecules/SearchField";
 import Header from "components/base/organisms/Header";
+import SearchField from "components/friends/SearchField";
 
 import friends from "mocks/friends";
 
