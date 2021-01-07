@@ -14,7 +14,7 @@ export default function AvatarGroup({
   children,
 }: PropsWithChildren<Props>) {
   return (
-    <article className={clsx("flex px-2", className)}>
+    <article className={clsx("flex", className)}>
       <div className="w-2/12 flex items-center p-2">
         <Avatar name={name} img={img} />
       </div>

@@ -1,11 +1,17 @@
+import { fillRemainHeight } from "utils";
+import { Transaction } from "types";
+import { map } from "ramda";
+
 import SearchField from "components/base/molecules/SearchField";
 import Header from "components/base/organisms/Header";
-import Record from "components/transfer/Record";
+import Record from "components/submain/Record";
 import Account from "components/submain/Account";
 
-import { fillRemainHeight } from "utils";
+import transactions from "mocks/transactions";
 
-import history from "mocks/transferHistory";
+const toRecord = (transaction: Transaction) => (
+  <Record key={transaction.id} {...transaction} className="mx-4" />
+);
 
 export default function SubMain() {
   return (
@@ -22,11 +28,7 @@ export default function SubMain() {
         </div>
 
         <div className="overflow-y-auto divide-y-2" ref={fillRemainHeight}>
-          {history.map(({ name, img, date }, index) => (
-            <div className="mx-4" key={index}>
-              <Record name={name} img={img} date={date} />
-            </div>
-          ))}
+          {map(toRecord)(transactions)}
         </div>
       </main>
     </>

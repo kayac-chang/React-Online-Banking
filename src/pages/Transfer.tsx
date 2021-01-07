@@ -1,7 +1,7 @@
 import { BsPlusCircle, BsCheckCircle, BsBootstrap } from "react-icons/bs";
 import { fillRemainHeight } from "utils";
 import { slice, pipe, map } from "ramda";
-import { Avator, TransferHistory } from "types";
+import { Avator, Transaction } from "types";
 
 import Avatar from "components/base/atoms/Avatar";
 import { NavBtn } from "components/base/atoms/Button";
@@ -10,13 +10,13 @@ import ArticleHeader from "components/transfer/ArticleHeader";
 import Record from "components/transfer/Record";
 
 import friends from "mocks/friends";
-import history from "mocks/transferHistory";
+import history from "mocks/transactions";
 
 const toAvatar = ({ img, name }: Avator) => (
   <Avatar key={name} img={img} name={name} showName className="flex-1" />
 );
 
-const toRecord = ({ id, name, img, date }: TransferHistory) => (
+const toRecord = ({ id, name, img, date }: Transaction) => (
   <Record key={id} name={name} img={img} date={date} />
 );
 
