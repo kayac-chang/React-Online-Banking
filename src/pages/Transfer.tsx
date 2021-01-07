@@ -13,7 +13,7 @@ import friends from "mocks/friends";
 import history from "mocks/transferHistory";
 
 const toAvatar = ({ img, name }: Avator) => (
-  <Avatar key={name} className="flex-1" img={img} name={name} showName />
+  <Avatar key={name} img={img} name={name} showName className="flex-1" />
 );
 
 const toRecord = ({ id, name, img, date }: TransferHistory) => (
