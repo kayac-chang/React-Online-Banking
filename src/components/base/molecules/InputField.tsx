@@ -1,21 +1,9 @@
 import { cond, type, equals, pipe, applyTo, identity } from "ramda";
-import { ReactNode, useState, isValidElement } from "react";
+import { ReactNode, isValidElement } from "react";
+
+import useFocus from "hooks/useFocus";
 
 const isFunction = pipe(type, equals("Function"));
-
-function useFocus() {
-  const [focus, setFocus] = useState(false);
-
-  function onFocus() {
-    setFocus(true);
-  }
-
-  function onBlur() {
-    setFocus(false);
-  }
-
-  return { focus, onFocus, onBlur };
-}
 
 type Props = {
   children?: ((focus: boolean) => ReactNode) | ReactNode;
