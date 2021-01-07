@@ -1,12 +1,17 @@
 import clsx from "clsx";
 
-type Props = {
+type AvatarProps = {
   className?: string;
   img: string;
   name: string;
   showName?: boolean;
 };
-export default function Avatar({ img, name, className, showName }: Props) {
+export default function Avatar({
+  img,
+  name,
+  className,
+  showName,
+}: AvatarProps) {
   return (
     <figure
       className={clsx("inline-flex flex-col items-center space-y-1", className)}

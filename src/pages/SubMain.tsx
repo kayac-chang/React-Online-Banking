@@ -124,9 +124,9 @@ export default function SubMain() {
         </div>
 
         <div className="overflow-y-auto divide-y-2" ref={fillRemainHeight}>
-          {records.map(({ id, name, img, date }, index) => (
+          {records.map(({ name, img, date }, index) => (
             <div className="mx-4">
-              <Record key={index} id={id} name={name} img={img} date={date} />
+              <Record key={index} name={name} img={img} date={date} />
             </div>
           ))}
         </div>

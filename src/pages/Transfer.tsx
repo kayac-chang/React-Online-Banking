@@ -118,8 +118,8 @@ export default function Transfer() {
 
       <Section className="flex-1" title="最近紀錄">
         <div className="divide-y overflow-y-auto" ref={fillRemainHeight}>
-          {records.map(({ id, name, img, date }, index) => (
-            <Record key={index} id={id} name={name} img={img} date={date} />
+          {records.map(({ name, img, date }, index) => (
+            <Record key={index} name={name} img={img} date={date} />
           ))}
         </div>
       </Section>
