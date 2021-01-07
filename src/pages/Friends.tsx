@@ -18,7 +18,7 @@ export default function Friends() {
       <Header title="好友轉帳" subTitle="點選好友快速轉帳" align="start" />
 
       <div className="mx-4">
-        <SearchField />
+        <SearchField label="姓名, 電話" />
       </div>
 
       <article className="py-4 overflow-y-auto" ref={fillRemainHeight}>

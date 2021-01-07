@@ -2,7 +2,11 @@ import clsx from "clsx";
 import { BsSearch } from "react-icons/bs";
 import InputField from "components/base/molecules/InputField";
 
-export default function SearchField() {
+type SearchFieldProps = {
+  label: string;
+};
+
+export default function SearchField({ label }: SearchFieldProps) {
   return (
     <InputField>
       {(focus) => (
@@ -14,7 +18,7 @@ export default function SearchField() {
         >
           <BsSearch />
 
-          <span>姓名, 電話</span>
+          <span>{label}</span>
         </div>
       )}
     </InputField>
