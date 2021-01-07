@@ -11,6 +11,7 @@
     "react-icons": "^4.1.0",
     "react-router-dom": "^5.2.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "uuid": "^8.3.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -48,6 +49,7 @@
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.6",
+    "@types/uuid": "^8.3.0",
     "autoprefixer": "^9",
     "postcss": "^7",
     "react-scripts": "4.0.1",

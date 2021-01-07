@@ -4,13 +4,7 @@ import Record from "components/transfer/Record";
 import Header from "components/base/organisms/Header";
 import { fillRemainHeight } from "utils";
 
-import Avatar_06 from "assets/avatar/06.png";
-import Avatar_07 from "assets/avatar/07.png";
-import Avatar_08 from "assets/avatar/08.png";
-import Avatar_09 from "assets/avatar/09.png";
-import Avatar_10 from "assets/avatar/10.png";
-import Avatar_11 from "assets/avatar/11.png";
-import dayjs from "dayjs";
+import history from "mocks/transferHistory";
 
 function Account() {
   return (
@@ -34,81 +28,6 @@ function Account() {
   );
 }
 
-const records = [
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_06,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_07,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_08,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_09,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_10,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_11,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_09,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_09,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_09,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_09,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_09,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_09,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-];
-
 export default function SubMain() {
   return (
     <>
@@ -124,9 +43,9 @@ export default function SubMain() {
         </div>
 
         <div className="overflow-y-auto divide-y-2" ref={fillRemainHeight}>
-          {records.map(({ name, img, date }, index) => (
-            <div className="mx-4">
-              <Record key={index} name={name} img={img} date={date} />
+          {history.map(({ name, img, date }, index) => (
+            <div className="mx-4" key={index}>
+              <Record name={name} img={img} date={date} />
             </div>
           ))}
         </div>

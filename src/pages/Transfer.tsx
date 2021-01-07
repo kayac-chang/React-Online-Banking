@@ -1,99 +1,28 @@
-import dayjs from "dayjs";
 import { BsPlusCircle, BsCheckCircle, BsBootstrap } from "react-icons/bs";
 import { fillRemainHeight } from "utils";
+import { slice, pipe, map } from "ramda";
+import { Avator, TransferHistory } from "types";
 
-import Header from "components/base/organisms/Header";
-import Section from "components/base/organisms/Section";
-import Record from "components/transfer/Record";
 import Avatar from "components/base/atoms/Avatar";
 import { NavBtn } from "components/base/atoms/Button";
+import Header from "components/base/organisms/Header";
+import ArticleHeader from "components/transfer/ArticleHeader";
+import Record from "components/transfer/Record";
 
-import Avatar_01 from "assets/avatar/01.png";
-import Avatar_02 from "assets/avatar/02.png";
-import Avatar_03 from "assets/avatar/03.png";
-import Avatar_04 from "assets/avatar/04.png";
-import Avatar_05 from "assets/avatar/05.png";
-import Avatar_06 from "assets/avatar/06.png";
-import Avatar_07 from "assets/avatar/07.png";
-import Avatar_08 from "assets/avatar/08.png";
-import Avatar_09 from "assets/avatar/09.png";
-import Avatar_10 from "assets/avatar/10.png";
-import Avatar_11 from "assets/avatar/11.png";
+import friends from "mocks/friends";
+import history from "mocks/transferHistory";
 
-const friends = [
-  { img: Avatar_01, name: "Jermey123" },
-  { img: Avatar_02, name: "Cindy 888" },
-  { img: Avatar_03, name: "Elli.H" },
-  { img: Avatar_04, name: "Bruce J" },
-  { img: Avatar_05, name: "KM" },
-];
+const toAvatar = ({ img, name }: Avator) => (
+  <Avatar key={name} className="flex-1" img={img} name={name} showName />
+);
 
-const records = [
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_06,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_07,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_08,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_09,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_10,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_11,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_09,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_09,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_09,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-  {
-    id: "38000009393",
-    name: "Robert Fox",
-    img: Avatar_09,
-    date: dayjs().format("YYYY/MM/DD"),
-  },
-];
+const toRecord = ({ id, name, img, date }: TransferHistory) => (
+  <Record key={id} name={name} img={img} date={date} />
+);
 
 export default function Transfer() {
   return (
-    <div className="h-screen flex flex-col">
+    <>
       <Header title="轉入對象" close />
 
       <nav className="flex divide-x border h-16">
@@ -102,27 +31,21 @@ export default function Transfer() {
         <NavBtn label="轉好遠" icon={<BsBootstrap />} />
       </nav>
 
-      <Section title="好友" more>
-        <div className="flex items-center p-4 space-x-2">
-          {friends.map(({ img, name }) => (
-            <Avatar
-              key={name}
-              className="flex-1"
-              img={img}
-              name={name}
-              showName
-            />
-          ))}
-        </div>
-      </Section>
+      <article>
+        <ArticleHeader title="好友" more />
 
-      <Section className="flex-1" title="最近紀錄">
-        <div className="divide-y overflow-y-auto" ref={fillRemainHeight}>
-          {records.map(({ name, img, date }, index) => (
-            <Record key={index} name={name} img={img} date={date} />
-          ))}
+        <div className="flex items-center p-4 space-x-2">
+          {pipe(slice(0, 5), map(toAvatar))(friends)}
         </div>
-      </Section>
-    </div>
+      </article>
+
+      <article className="flex-1">
+        <ArticleHeader title="最近紀錄" />
+
+        <div className="divide-y overflow-y-auto" ref={fillRemainHeight}>
+          {map(toRecord)(history)}
+        </div>
+      </article>
+    </>
   );
 }
