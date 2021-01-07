@@ -1,34 +1,21 @@
+import { ReactNode } from "react";
+
 import { MdClose } from "react-icons/md";
 import { BsPlus } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
-import { ReactNode } from "react";
+import { FiInfo } from "react-icons/fi";
 
 type ButtonProps = {
   className?: string;
 };
-export function Close(props: ButtonProps) {
-  return (
-    <button {...props}>
-      <MdClose />
-    </button>
-  );
-}
+const IconButton = (icon: ReactNode) => (props: ButtonProps) => (
+  <button {...props}>{icon}</button>
+);
 
-export function Back(props: ButtonProps) {
-  return (
-    <button {...props}>
-      <IoIosArrowBack />
-    </button>
-  );
-}
-
-export function Plus(props: ButtonProps) {
-  return (
-    <button {...props}>
-      <BsPlus />
-    </button>
-  );
-}
+export const Close = IconButton(<MdClose />);
+export const Back = IconButton(<IoIosArrowBack />);
+export const Plus = IconButton(<BsPlus />);
+export const Info = IconButton(<FiInfo />);
 
 type NavBtnProps = {
   label: string;

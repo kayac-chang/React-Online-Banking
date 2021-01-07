@@ -11,7 +11,7 @@ export default function App() {
       <Switch>
         <Route path="/transfer" component={Transfer} />
         <Route path="/friends" component={Friends} />
-        <Route path="/sub-main" component={SubMain} />
+        <Route path="/submain" component={SubMain} />
 
         <Route path="/" component={Home} />
       </Switch>

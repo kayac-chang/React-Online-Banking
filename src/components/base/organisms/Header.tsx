@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import { Back, Close } from "components/atoms/Button";
+import { Back, Close } from "components/base/atoms/Button";
 
-type Props = {
+type HeaderProps = {
   title?: string;
   subTitle?: string;
   align?: "start" | "end" | "center";
@@ -14,7 +14,7 @@ export default function Header({
   align = "center",
   close = false,
   back = false,
-}: Props) {
+}: HeaderProps) {
   return (
     <header className="h-14 relative">
       {title && (

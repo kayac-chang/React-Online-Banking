@@ -2,11 +2,11 @@ import dayjs from "dayjs";
 import { BsPlusCircle, BsCheckCircle, BsBootstrap } from "react-icons/bs";
 import { fillRemainHeight } from "utils";
 
-import Header from "components/organisms/Header";
-import Section from "components/organisms/Section";
-import Record from "components/molecules/Record";
-import Avatar from "components/atoms/Avatar";
-import { NavBtn } from "components/atoms/Button";
+import Header from "components/base/organisms/Header";
+import Section from "components/base/organisms/Section";
+import Record from "components/transfer/Record";
+import Avatar from "components/base/atoms/Avatar";
+import { NavBtn } from "components/base/atoms/Button";
 
 import Avatar_01 from "assets/avatar/01.png";
 import Avatar_02 from "assets/avatar/02.png";

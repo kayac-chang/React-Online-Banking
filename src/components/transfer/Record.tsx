@@ -1,6 +1,5 @@
-import clsx from "clsx";
-import Avatar from "components/atoms/Avatar";
-import { Plus } from "components/atoms/Button";
+import { Plus } from "components/base/atoms/Button";
+import AvatarGroup from "components/base/molecules/AvatarGroup";
 
 type Props = {
   className?: string;
@@ -11,11 +10,7 @@ type Props = {
 };
 export default function Record({ img, name, id, date, className }: Props) {
   return (
-    <article className={clsx("flex px-2", className)}>
-      <div className="w-2/12 flex items-center p-2">
-        <Avatar name={name} img={img} />
-      </div>
-
+    <AvatarGroup name={name} img={img} className={className}>
       <div className="flex-1 flex flex-col justify-center">
         <h3>
           {name} {`(帳號: ${id})`}
@@ -27,6 +22,6 @@ export default function Record({ img, name, id, date, className }: Props) {
       <div className="flex justify-center items-center">
         <Plus className="p-2 text-2xl" />
       </div>
-    </article>
+    </AvatarGroup>
   );
 }
