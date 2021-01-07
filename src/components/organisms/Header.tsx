@@ -1,33 +1,41 @@
 import clsx from "clsx";
-import { Close } from "components/atoms/Button";
+import { Back, Close } from "components/atoms/Button";
 
 type Props = {
   title?: string;
   subTitle?: string;
   align?: "start" | "end" | "center";
   close?: boolean;
+  back?: boolean;
 };
 export default function Header({
   title = "",
   subTitle = "",
   align = "center",
   close = false,
+  back = false,
 }: Props) {
   return (
     <header className="h-14 relative">
-      <hgroup
-        className={clsx(
-          "h-full flex items-end p-4 space-x-4",
-          `justify-${align}`
-        )}
-      >
-        <h1 className="text-xl">{title}</h1>
+      {title && (
+        <hgroup
+          className={clsx(
+            "h-full flex items-end p-4 space-x-4",
+            `justify-${align}`
+          )}
+        >
+          <h1 className="text-xl">{title}</h1>
 
-        {subTitle && <h2 className="text-xs py-px">{subTitle}</h2>}
-      </hgroup>
+          {subTitle && <h2 className="text-xs py-px">{subTitle}</h2>}
+        </hgroup>
+      )}
 
-      <div className="absolute top-0 left-0 w-full h-full flex justify-end items-center px-2">
-        {close && <Close className="text-3xl" />}
+      <div className="absolute top-0 left-0 w-full h-full px-2">
+        <div className="relative w-full h-full flex items-center">
+          {back && <Back className="absolute left-0 text-2xl" />}
+
+          {close && <Close className="absolute right-0 text-3xl" />}
+        </div>
       </div>
     </header>
   );

@@ -1,5 +1,6 @@
 import { MdClose } from "react-icons/md";
 import { BsPlus } from "react-icons/bs";
+import { IoIosArrowBack } from "react-icons/io";
 import { ReactNode } from "react";
 
 type ButtonProps = {
@@ -9,6 +10,14 @@ export function Close(props: ButtonProps) {
   return (
     <button {...props}>
       <MdClose />
+    </button>
+  );
+}
+
+export function Back(props: ButtonProps) {
+  return (
+    <button {...props}>
+      <IoIosArrowBack />
     </button>
   );
 }
