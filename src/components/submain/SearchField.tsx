@@ -1,8 +1,8 @@
-import Tabs from "components/base/molecules/Tabs";
 import clsx from "clsx";
 import { BsSearch } from "react-icons/bs";
 
 import Tab from "components/base/atoms/Tab";
+import Tabs from "components/base/molecules/Tabs";
 import InputField from "components/base/molecules/InputField";
 
 const filters = [
