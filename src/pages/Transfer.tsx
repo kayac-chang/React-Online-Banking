@@ -1,7 +1,7 @@
+import { Avator, Transaction } from "types";
 import { BsPlusCircle, BsCheckCircle, BsBootstrap } from "react-icons/bs";
 import { fillRemainHeight } from "utils";
 import { slice, pipe, map } from "ramda";
-import { Avator, Transaction } from "types";
 
 import Avatar from "components/base/atoms/Avatar";
 import { NavBtn } from "components/base/atoms/Button";

@@ -1,5 +1,5 @@
-import { fillRemainHeight } from "utils";
 import { Avator } from "types";
+import { fillRemainHeight } from "utils";
 import { map } from "ramda";
 
 import Avatar from "components/base/atoms/Avatar";
@@ -8,8 +8,8 @@ import SearchField from "components/friends/SearchField";
 
 import friends from "mocks/friends";
 
-const toAvatar = ({ img, name }: Avator) => (
-  <Avatar key={name} img={img} name={name} showName />
+const toAvatar = ({ id, img, name }: Avator) => (
+  <Avatar key={id} img={img} name={name} showName />
 );
 
 export default function Friends() {

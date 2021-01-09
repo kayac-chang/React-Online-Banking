@@ -1,4 +1,5 @@
 export interface Avator {
+  id: string;
   img: string;
   name: string;
 }
