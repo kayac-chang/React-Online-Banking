@@ -1,11 +1,10 @@
-import { Avator, Transaction } from "types";
+import { Avatar, Transaction } from "types";
 import AvatarGroup from "components/base/molecules/AvatarGroup";
 
-interface Props extends Avator, Transaction {
+interface Props extends Avatar, Transaction {
   className?: string;
   date: string;
 }
-
 function Type2({ description, amount, balance, date, name }: Props) {
   return (
     <div className="flex-1 flex text-sm">

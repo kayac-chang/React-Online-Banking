@@ -1,20 +1,20 @@
-import { useState, ReactNode, isValidElement } from "react";
-import { cond, type, equals, pipe, applyTo, identity } from "ramda";
-
-const isFunction = pipe(type, equals("Function"));
+import { useState, Dispatch, SetStateAction } from "react";
+import RenderProps from "components/base/atoms/RenderProps";
+import type { RenderPropsChildren } from "components/base/atoms/RenderProps";
 
 type TabsProps = {
-  children?: ((active: number) => ReactNode) | ReactNode;
+  active?: number;
+  children?: RenderPropsChildren<{
+    active: number;
+    setActive: Dispatch<SetStateAction<number>>;
+  }>;
 };
-export default function Tabs({ children }: TabsProps) {
-  const [active, setActive] = useState(0);
+export default function Tabs({ children, active: initActive = 0 }: TabsProps) {
+  const [active, setActive] = useState(initActive);
 
   return (
-    <>
-      {cond([
-        [isValidElement, identity],
-        [isFunction, applyTo(active)],
-      ])(children)}
-    </>
+    <RenderProps active={active} setActive={setActive}>
+      {children}
+    </RenderProps>
   );
 }

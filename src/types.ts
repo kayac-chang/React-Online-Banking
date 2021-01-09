@@ -1,10 +1,10 @@
-export interface Avator {
+export interface Avatar {
   id: string;
   img: string;
   name: string;
 }
 
-export interface Transaction extends Avator {
+export interface Transaction extends Avatar {
   id: string;
   name: string;
   img: string;

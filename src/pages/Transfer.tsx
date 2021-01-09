@@ -1,4 +1,4 @@
-import { Avator, Transaction } from "types";
+import type { Avatar as IAvatar, Transaction } from "types";
 import { BsPlusCircle, BsCheckCircle, BsBootstrap } from "react-icons/bs";
 import { fillRemainHeight } from "utils";
 import { slice, pipe, map } from "ramda";
@@ -12,7 +12,7 @@ import Record from "components/transfer/Record";
 import friends from "mocks/friends";
 import history from "mocks/transactions";
 
-const toAvatar = ({ img, name }: Avator) => (
+const toAvatar = ({ img, name }: IAvatar) => (
   <Avatar key={name} img={img} name={name} showName className="flex-1" />
 );
 

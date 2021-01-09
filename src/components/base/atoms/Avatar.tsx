@@ -1,9 +1,8 @@
 import clsx from "clsx";
+import type { Avatar as IAvatar } from "types";
 
-type AvatarProps = {
+type AvatarProps = Omit<IAvatar, "id"> & {
   className?: string;
-  img: string;
-  name: string;
   showName?: boolean;
 };
 export default function Avatar({

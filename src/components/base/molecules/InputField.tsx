@@ -1,30 +1,26 @@
-import { cond, type, equals, pipe, applyTo, identity } from "ramda";
-import { ReactNode, isValidElement } from "react";
+import RenderProps from "components/base/atoms/RenderProps";
+import type { RenderPropsChildren } from "components/base/atoms/RenderProps";
 
 import useFocus from "hooks/useFocus";
 
-const isFunction = pipe(type, equals("Function"));
-
-type Props = {
-  children?: ((focus: boolean) => ReactNode) | ReactNode;
+type InputFieldProps = {
+  type: string;
+  children?: RenderPropsChildren<{ focus: boolean }>;
 };
-export default function InputField({ children }: Props) {
+export default function InputField({ type, children }: InputFieldProps) {
   const { focus, ...props } = useFocus();
 
   return (
     <label>
       <div className="relative bg-gray-300 h-10">
         <input
-          {...props}
+          type={type}
           className="bg-transparent w-full h-full px-4 py-2"
-          type="search"
+          {...props}
         />
 
         <div className="absolute top-0 left-0 w-full h-full">
-          {cond([
-            [isValidElement, identity],
-            [isFunction, applyTo(focus)],
-          ])(children)}
+          <RenderProps focus={focus}>{children}</RenderProps>
         </div>
       </div>
     </label>

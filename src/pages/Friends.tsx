@@ -1,4 +1,4 @@
-import { Avator } from "types";
+import type { Avatar as IAvatar } from "types";
 import { fillRemainHeight } from "utils";
 import { map } from "ramda";
 
@@ -8,7 +8,7 @@ import SearchField from "components/friends/SearchField";
 
 import friends from "mocks/friends";
 
-const toAvatar = ({ id, img, name }: Avator) => (
+const toAvatar = ({ id, img, name }: IAvatar) => (
   <Avatar key={id} img={img} name={name} showName />
 );
 

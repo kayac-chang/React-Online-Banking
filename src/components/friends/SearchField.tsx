@@ -5,10 +5,9 @@ import InputField from "components/base/molecules/InputField";
 type SearchFieldProps = {
   label: string;
 };
-
 export default function SearchField({ label }: SearchFieldProps) {
   return (
-    <InputField>
+    <InputField type="search">
       {(focus) => (
         <div
           className={clsx(
