@@ -28,31 +28,41 @@ const filters = [
   },
 ];
 
+function FilterTabs() {
+  return (
+    <nav className="space-x-2">
+      <Tabs>
+        {({ active, setActive }) =>
+          filters.map((props, index) => (
+            <Tab
+              key={props.href}
+              className={clsx(
+                "px-2 py-1",
+                active === index && "bg-gray-100",
+                active === index ? "text-black" : "text-white"
+              )}
+              onClick={() => setActive(index)}
+              {...props}
+            />
+          ))
+        }
+      </Tabs>
+    </nav>
+  );
+}
+
 export default function SearchField() {
   return (
     <InputField type="search">
-      <div className="flex justify-between items-center p-2">
-        <nav className="space-x-2">
-          <Tabs>
-            {({ active, setActive }) =>
-              filters.map((props, index) => (
-                <Tab
-                  key={props.href}
-                  className={clsx(
-                    "px-2 py-1",
-                    active === index && "bg-gray-100",
-                    active === index ? "text-black" : "text-white"
-                  )}
-                  onClick={() => setActive(index)}
-                  {...props}
-                />
-              ))
-            }
-          </Tabs>
-        </nav>
+      {({ focus }) => (
+        <div className="h-full flex items-center p-2">
+          {!focus && <FilterTabs />}
 
-        <BsSearch />
-      </div>
+          <span className="ml-auto">
+            <BsSearch />
+          </span>
+        </div>
+      )}
     </InputField>
   );
 }
