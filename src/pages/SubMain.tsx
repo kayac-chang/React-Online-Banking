@@ -20,7 +20,11 @@ export default function SubMain() {
 
       <main className="space-y-2">
         <div>
-          <Account />
+          <Account
+            balance="$320,000,000"
+            name="皇太后的金庫"
+            id="母帳戶 909019-09102"
+          />
         </div>
 
         <div className="mx-4">
