@@ -1,13 +1,14 @@
-import { ReactNode } from "react";
+import { ReactNode, DetailedHTMLProps, ButtonHTMLAttributes } from "react";
 
 import { MdClose } from "react-icons/md";
 import { BsPlus } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
 import { FiInfo } from "react-icons/fi";
 
-type ButtonProps = {
-  className?: string;
-};
+type ButtonProps = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
 const IconButton = (icon: ReactNode) => (props: ButtonProps) => (
   <button {...props}>{icon}</button>
 );
