@@ -1,6 +1,7 @@
 import { Transaction } from "types";
 import { fillRemainHeight } from "utils";
 import { map } from "ramda";
+import { Link } from "react-router-dom";
 
 import Header from "components/base/organisms/Header";
 import Record from "components/submain/Record";
@@ -10,7 +11,14 @@ import SearchField from "components/submain/SearchField";
 import transactions from "mocks/transactions";
 
 const toRecord = (transaction: Transaction) => (
-  <Record key={transaction.id} {...transaction} className="mx-4" />
+  <Link
+    key={transaction.id}
+    to={(location) =>
+      "/" + [location.pathname.replaceAll("/", ""), transaction.id].join("/")
+    }
+  >
+    <Record {...transaction} className="mx-4" />
+  </Link>
 );
 
 export default function SubMain() {
