@@ -1,5 +1,11 @@
 # Getting Started with Create React App
 
+## Remote
+
+- origin https://github.com/lexionlu-design/bankee-app.git
+
+- release https://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/Main_WebView
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
