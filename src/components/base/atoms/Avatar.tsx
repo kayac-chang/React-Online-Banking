@@ -15,7 +15,11 @@ export default function Avatar({
     <figure
       className={clsx("inline-flex flex-col items-center space-y-1", className)}
     >
-      <img className="rounded-full" src={img} alt={`${name}'s avatar`} />
+      <img
+        className="rounded-full max-h-full"
+        src={img}
+        alt={`${name}'s avatar`}
+      />
 
       {showName && <figcaption className="text-xs">{name}</figcaption>}
     </figure>
