@@ -16,8 +16,9 @@ const toRecord = (transaction: Transaction) => (
     to={(location) =>
       "/" + [location.pathname.replaceAll("/", ""), transaction.id].join("/")
     }
+    className="block"
   >
-    <Record {...transaction} className="mx-4" />
+    <Record {...transaction} />
   </Link>
 );
 
@@ -39,7 +40,10 @@ export default function SubMain() {
           <SearchField />
         </div>
 
-        <div className="overflow-y-auto divide-y-2" ref={fillRemainHeight}>
+        <div
+          className="overflow-y-auto divide-y-2 divide-gray-200 px-4"
+          ref={fillRemainHeight}
+        >
           {map(toRecord)(transactions)}
         </div>
       </main>
