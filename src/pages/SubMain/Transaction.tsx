@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 import Header from "components/base/organisms/Header";
 import Overview from "components/submain/transaction/Overview";
@@ -10,7 +10,7 @@ function Detail() {
 }
 
 export default function Transaction() {
-  const { transactionID } = useParams<{ transactionID: string }>();
+  // const { transactionID } = useParams<{ transactionID: string }>();
 
   return (
     <>
