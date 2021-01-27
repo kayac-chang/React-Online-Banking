@@ -10,6 +10,6 @@ export interface Transaction extends Avatar {
   img: string;
   date: string;
   description: string;
-  amount: number;
-  balance: number;
+  amount: string;
+  balance: string;
 }
