@@ -1,17 +1,41 @@
 # Bankee
 
+## Requirement
+
+_You’ll need to have Node >= 10 on your local development machine_ (but it’s not required on the server).
+
+You can use _nvm_ (macOS/Linux) or _nvm-windows_ to switch Node versions between different projects.
+
 ## Remote
 
 - origin https://github.com/lexionlu-design/bankee-app.git
 
 - release https://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/Main_WebView
 
-## About
+## Todo List
 
-This project was bootstrapped with:
+- [ ] Overview
 
-- [Create React App](https://github.com/facebook/create-react-app).
-- [tailwindcss](https://tailwindcss.com/)
+  - [ ] Type System
+  - [ ] Model
+
+- [ ] Component ( React )
+
+  - [ ] Style ( Tailwindcss )
+  - [ ] UI Behavior ( Event, xState )
+  - [ ] Animation
+
+- [ ] Domain Logic
+
+  - [ ] Routing
+  - [ ] State Management
+
+- [ ] API Integration
+  - [ ] Mock Data
+
+## Architecture
+
+![Architecture](./Frontend_Application_Architecture.jpg)
 
 ## Setup
 
@@ -56,3 +80,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+To learn Tailwindcss, check out the [Tailwindcss documentation](https://tailwindcss.com/).

@@ -1,7 +1,14 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: false,
   theme: {
+    backgroundColor: (theme) => ({
+      ...theme("colors"),
+      button: colors.coolGray[300],
+      field: colors.coolGray[300],
+    }),
     extend: {
       transitionTimingFunction: {
         "in-expo": "cubic-bezier(0.95, 0.05, 0.795, 0.035)",
