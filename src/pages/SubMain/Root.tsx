@@ -3,7 +3,7 @@ import { fillRemainHeight } from "utils";
 import { Link, useHistory } from "react-router-dom";
 import clsx from "clsx";
 
-import { Modal, Info } from "components/atoms";
+import { Modal } from "components/atoms";
 import {
   AvatarGroup,
   InputFieldWithPlaceholder,
@@ -14,6 +14,7 @@ import { Header } from "components/organisms";
 import transactions from "mocks/transactions";
 
 import { BsSearch } from "react-icons/bs";
+import { FiInfo } from "react-icons/fi";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 type AccountProps = {
@@ -31,14 +32,16 @@ function Account({ balance, name, id }: AccountProps) {
           <h3 className="flex items-center space-x-1">
             <span>{name}</span>
 
-            <Info />
+            <Link to="#info">
+              <FiInfo />
+            </Link>
           </h3>
 
           <div className="text-sm">{id}</div>
         </div>
 
         <div>
-          <Link to={"#menu"}>
+          <Link to="#menu">
             <HiOutlineDotsHorizontal className="w-6 h-6" />
           </Link>
         </div>
@@ -190,6 +193,30 @@ export default function SubMain() {
             </div>
           }
         />
+      </Modal>
+
+      <Modal
+        open={location.hash === "#info"}
+        onClickAway={goBack}
+        className="flex flex-col justify-center"
+      >
+        <div className="bg-white mx-12">
+          <section className="px-12 py-6 text-center">
+            <div className="py-2 flex justify-center">
+              <span className="flex-1">2.5%利率</span>
+              <span className="flex-1 bg-field rounded-full">＄50,000</span>
+            </div>
+
+            <div className="py-2 flex justify-center">
+              <span className="flex-1">利息試算</span>
+              <span className="flex-1 bg-field rounded-full">88%</span>
+            </div>
+          </section>
+
+          <footer className="h-12 border-t flex">
+            <button className="flex-1">確認</button>
+          </footer>
+        </div>
       </Modal>
     </>
   );
