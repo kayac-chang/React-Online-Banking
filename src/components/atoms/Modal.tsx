@@ -7,7 +7,7 @@ type ModalProps = {
   className?: string;
   onClickAway?: () => void;
 };
-export default function Modal({
+export function Modal({
   open = true,
   children,
   className,
@@ -15,20 +15,18 @@ export default function Modal({
 }: ModalProps) {
   const ref = useRef<HTMLDivElement>(null);
 
-  function onClick(event: MouseEvent) {
-    const inside = ref?.current?.firstChild?.contains(event.target as Node);
-
-    if (inside) return;
-
-    onClickAway?.();
-  }
-
   if (!open) return <></>;
 
   return (
     <div
       ref={ref}
-      onClickCapture={onClick}
+      onClickCapture={(event: MouseEvent) => {
+        const inside = ref?.current?.firstChild?.contains(event.target as Node);
+
+        if (inside || !onClickAway) return;
+
+        onClickAway();
+      }}
       className={clsx(
         "fixed top-0 w-screen h-screen bg-black bg-opacity-70",
         className

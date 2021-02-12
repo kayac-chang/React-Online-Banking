@@ -1,4 +1,4 @@
-import Avatar from "components/base/atoms/Avatar";
+import { Avatar } from "../atoms";
 import clsx from "clsx";
 import { PropsWithChildren } from "react";
 
@@ -7,7 +7,7 @@ type Props = {
   name: string;
   img: string;
 };
-export default function AvatarGroup({
+export function AvatarGroup({
   name,
   img,
   className,

@@ -2,9 +2,10 @@ import type { Avatar as IAvatar } from "types";
 import { fillRemainHeight } from "utils";
 import { map } from "ramda";
 
-import Avatar from "components/base/atoms/Avatar";
-import Header from "components/base/organisms/Header";
-import { InputFieldWithPlaceholder } from "components/base/molecules/InputField";
+import { Avatar } from "components/atoms";
+import { InputFieldWithPlaceholder } from "components/molecules";
+import { Header } from "components/organisms";
+
 import { BsSearch } from "react-icons/bs";
 
 import friends from "mocks/friends";

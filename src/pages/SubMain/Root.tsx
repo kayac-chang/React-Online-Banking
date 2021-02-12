@@ -1,17 +1,14 @@
+import { Avatar, Transaction } from "types";
 import { fillRemainHeight } from "utils";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import clsx from "clsx";
 import { BsSearch } from "react-icons/bs";
 
-import Header from "components/base/organisms/Header";
-import BottomDrawer from "components/base/organisms/BottomDrawer";
-import Modal from "components/base/atoms/Modal";
-import AvatarGroup from "components/base/molecules/AvatarGroup";
-import { Info } from "components/base/atoms/Button";
-import { InputFieldWithPlaceholder } from "components/base/molecules/InputField";
+import { Modal, Info } from "components/atoms";
+import { AvatarGroup, InputFieldWithPlaceholder } from "components/molecules";
+import { Header, BottomDrawer } from "components/organisms";
 
 import transactions from "mocks/transactions";
-import { Avatar, Transaction } from "types";
 
 type AccountProps = {
   balance: string;
@@ -83,29 +80,6 @@ const filters = [
   },
 ];
 
-function FilterTabs() {
-  const location = useLocation();
-
-  return (
-    <nav className="space-x-2">
-      {filters.map((props) => (
-        <Link
-          key={props.label}
-          to={props.to}
-          className={clsx(
-            "px-2 py-1",
-            location.search === props.to
-              ? "bg-gray-100 text-black"
-              : "text-white pointer-events-auto"
-          )}
-        >
-          {props.label}
-        </Link>
-      ))}
-    </nav>
-  );
-}
-
 export default function SubMain() {
   const { goBack, location } = useHistory();
 
@@ -124,7 +98,22 @@ export default function SubMain() {
           type="search"
           placeholder={
             <>
-              <FilterTabs />
+              <nav className="space-x-2">
+                {filters.map((props) => (
+                  <Link
+                    key={props.label}
+                    to={props.to}
+                    className={clsx(
+                      "px-2 py-1",
+                      location.search === props.to
+                        ? "bg-gray-100 text-black"
+                        : "text-white pointer-events-auto"
+                    )}
+                  >
+                    {props.label}
+                  </Link>
+                ))}
+              </nav>
 
               <span className="ml-auto">
                 <BsSearch />

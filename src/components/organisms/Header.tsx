@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Back as BackBtn, Close } from "components/base/atoms/Button";
+import { Back as BackBtn, Close } from "../atoms/Button";
 import { useHistory } from "react-router-dom";
 
 type Props = {
@@ -24,7 +24,7 @@ type HeaderProps = {
   close?: boolean;
   back?: boolean;
 };
-export default function Header({
+export function Header({
   title = "",
   subTitle = "",
   align = "center",

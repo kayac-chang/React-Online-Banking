@@ -7,7 +7,7 @@ export type RenderPropsChildren<T> = ((prop: T) => ReactNode) | ReactNode;
 export type Props<T> = T & {
   children?: RenderPropsChildren<T>;
 };
-export default function RenderProps<T>({ children, ...props }: Props<T>) {
+export function RenderProps<T>({ children, ...props }: Props<T>) {
   return (
     <>
       {cond([

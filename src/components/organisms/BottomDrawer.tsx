@@ -1,9 +1,9 @@
-import { InputFieldWithPlaceholder } from "components/base/molecules/InputField";
+import { InputFieldWithPlaceholder } from "../molecules/InputField";
 
 type Props = {
   onClose?: () => void;
 };
-export default function BottomDrawer({ onClose }: Props) {
+export function BottomDrawer({ onClose }: Props) {
   return (
     <article className="absolute bottom-0 w-full h-1/3 bg-white flex flex-col">
       <header className="mx-8 h-1/5">

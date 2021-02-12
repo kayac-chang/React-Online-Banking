@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { ReactNode } from "react";
 
-import RenderProps from "components/base/atoms/RenderProps";
-import type { RenderPropsChildren } from "components/base/atoms/RenderProps";
+import { RenderProps } from "../atoms";
+import type { RenderPropsChildren } from "../atoms/RenderProps";
 
 import useFocus from "hooks/useFocus";
 

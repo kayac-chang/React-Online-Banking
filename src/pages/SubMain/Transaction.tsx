@@ -1,6 +1,7 @@
-import Header from "components/base/organisms/Header";
 import { Avatar as IAvatar } from "types";
-import Avatar from "components/base/atoms/Avatar";
+import { Avatar } from "components/atoms";
+import { Header } from "components/organisms";
+
 import IMG from "assets/avatar/01.png";
 
 type ItemProps = {

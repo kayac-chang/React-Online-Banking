@@ -5,12 +5,7 @@ type AvatarProps = Omit<IAvatar, "id"> & {
   className?: string;
   showName?: boolean;
 };
-export default function Avatar({
-  img,
-  name,
-  className,
-  showName,
-}: AvatarProps) {
+export function Avatar({ img, name, className, showName }: AvatarProps) {
   return (
     <figure
       className={clsx("inline-flex flex-col items-center space-y-1", className)}
