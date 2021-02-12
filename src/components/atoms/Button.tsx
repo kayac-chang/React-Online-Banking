@@ -1,4 +1,9 @@
-import { ReactNode, DetailedHTMLProps, ButtonHTMLAttributes } from "react";
+import {
+  ReactNode,
+  DetailedHTMLProps,
+  ButtonHTMLAttributes,
+  cloneElement,
+} from "react";
 
 import { MdClose } from "react-icons/md";
 import { BsPlus } from "react-icons/bs";
@@ -9,8 +14,8 @@ type ButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >;
-const IconButton = (icon: ReactNode) => (props: ButtonProps) => (
-  <button {...props}>{icon}</button>
+const IconButton = (icon: JSX.Element) => (props: ButtonProps) => (
+  <button {...props}>{cloneElement(icon, {})}</button>
 );
 
 export const Close = IconButton(<MdClose />);

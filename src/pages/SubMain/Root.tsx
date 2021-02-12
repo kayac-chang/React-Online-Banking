@@ -2,47 +2,19 @@ import { Avatar, Transaction } from "types";
 import { fillRemainHeight } from "utils";
 import { Link, useHistory } from "react-router-dom";
 import clsx from "clsx";
-import { BsSearch } from "react-icons/bs";
 
 import { Modal, Info } from "components/atoms";
-import { AvatarGroup, InputFieldWithPlaceholder } from "components/molecules";
+import {
+  AvatarGroup,
+  InputFieldWithPlaceholder,
+  BottomDrawer,
+} from "components/molecules";
 import { Header } from "components/organisms";
 
 import transactions from "mocks/transactions";
 
-type Props = {
-  onClose?: () => void;
-};
-function BottomDrawer({ onClose }: Props) {
-  return (
-    <article className="absolute bottom-0 w-full h-1/3 bg-white flex flex-col">
-      <header className="mx-8 h-1/5">
-        <h3 className="h-full flex items-center text-lg">自訂區間</h3>
-      </header>
-
-      <section className="mx-8 flex-1 space-y-2">
-        <InputFieldWithPlaceholder
-          type="text"
-          label="起始日"
-          placeholder="請選擇"
-        />
-
-        <InputFieldWithPlaceholder
-          type="text"
-          label="結束日"
-          placeholder="請選擇"
-        />
-      </section>
-
-      <footer className="flex h-1/5 divide-x divide-white">
-        <button className="bg-button flex-1" onClick={onClose}>
-          取消
-        </button>
-        <button className="bg-button flex-1">查詢</button>
-      </footer>
-    </article>
-  );
-}
+import { BsSearch } from "react-icons/bs";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 type AccountProps = {
   balance: string;
@@ -54,15 +26,23 @@ function Account({ balance, name, id }: AccountProps) {
     <article className="text-gray-500 space-y-2">
       <h2 className="text-4xl">{balance}</h2>
 
-      <section>
-        <h3 className="flex items-center space-x-1">
-          <span>{name}</span>
+      <div className="flex">
+        <div className="flex-1">
+          <h3 className="flex items-center space-x-1">
+            <span>{name}</span>
 
-          <Info />
-        </h3>
+            <Info />
+          </h3>
 
-        <div className="text-sm">{id}</div>
-      </section>
+          <div className="text-sm">{id}</div>
+        </div>
+
+        <div>
+          <Link to={"#menu"}>
+            <HiOutlineDotsHorizontal className="w-6 h-6" />
+          </Link>
+        </div>
+      </div>
     </article>
   );
 }
@@ -149,9 +129,7 @@ export default function SubMain() {
                 ))}
               </nav>
 
-              <span className="ml-auto">
-                <BsSearch />
-              </span>
+              <BsSearch className="ml-auto" />
             </>
           }
         />
@@ -173,7 +151,45 @@ export default function SubMain() {
       </main>
 
       <Modal open={location.hash === "#custom"} onClickAway={goBack}>
-        <BottomDrawer onClose={goBack} />
+        <BottomDrawer
+          header={
+            <h3 className="h-full flex items-center text-lg pt-4">自訂區間</h3>
+          }
+          body={
+            <div className="pb-8 pt-2 space-y-2">
+              <InputFieldWithPlaceholder
+                type="text"
+                label="起始日"
+                placeholder="請選擇"
+              />
+
+              <InputFieldWithPlaceholder
+                type="text"
+                label="結束日"
+                placeholder="請選擇"
+              />
+            </div>
+          }
+          footer={
+            <footer className="h-12 flex divide-x divide-white">
+              <button className="bg-button flex-1 h-full" onClick={goBack}>
+                取消
+              </button>
+              <button className="bg-button flex-1 h-full">查詢</button>
+            </footer>
+          }
+        />
+      </Modal>
+
+      <Modal open={location.hash === "#menu"} onClickAway={goBack}>
+        <BottomDrawer
+          body={
+            <div className="flex flex-col py-4">
+              <button className="p-2 text-left">轉帳</button>
+              <button className="p-2 text-left">無卡提款</button>
+            </div>
+          }
+        />
       </Modal>
     </>
   );
