@@ -1,7 +1,5 @@
-import { Transaction } from "types";
 import { fillRemainHeight } from "utils";
-import { map } from "ramda";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import { BsSearch } from "react-icons/bs";
 
@@ -9,70 +7,56 @@ import Header from "components/base/organisms/Header";
 import Record from "components/submain/Record";
 import Account from "components/submain/Account";
 import BottomDrawer from "components/base/organisms/BottomDrawer";
-import Tab from "components/base/atoms/Tab";
-import Tabs from "components/base/molecules/Tabs";
+import Modal from "components/base/atoms/Modal";
 import { InputFieldWithPlaceholder } from "components/base/molecules/InputField";
 
 import transactions from "mocks/transactions";
 
-const toRecord = (transaction: Transaction) => (
-  <Link
-    key={transaction.id}
-    to={(location) =>
-      "/" + [location.pathname.replaceAll("/", ""), transaction.id].join("/")
-    }
-    className="block"
-  >
-    <Record {...transaction} />
-  </Link>
-);
+const filters = [
+  {
+    to: "?filter=12",
+    label: "12月",
+  },
+  {
+    to: "?filter=11",
+    label: "11月",
+  },
+  {
+    to: "?filter=10",
+    label: "10月",
+  },
+  {
+    to: "#custom",
+    label: "自訂區間",
+  },
+];
 
 function FilterTabs() {
-  const filters = [
-    {
-      href: "#dec",
-      ariaControls: "december",
-      label: "12月",
-    },
-    {
-      href: "#nov",
-      ariaControls: "november",
-      label: "11月",
-    },
-    {
-      href: "#oct",
-      ariaControls: "october",
-      label: "10月",
-    },
-    {
-      href: "#custom",
-      ariaControls: "custom",
-      label: "自訂區間",
-    },
-  ];
+  const location = useLocation();
 
   return (
     <nav className="space-x-2">
-      <Tabs>
-        {({ active, setActive }) =>
-          filters.map((props, index) => (
-            <Tab
-              key={props.href}
-              className={clsx(
-                "px-2 py-1 pointer-events-auto",
-                active === index ? "bg-gray-100 text-black" : "text-white"
-              )}
-              onClick={() => setActive(index)}
-              {...props}
-            />
-          ))
-        }
-      </Tabs>
+      {filters.map((props) => (
+        <Link
+          key={props.label}
+          to={props.to}
+          className={clsx(
+            "px-2 py-1",
+            location.search === props.to
+              ? "bg-gray-100 text-black"
+              : "text-white pointer-events-auto"
+          )}
+        >
+          {props.label}
+        </Link>
+      ))}
     </nav>
   );
 }
 
 export default function SubMain() {
+  const { goBack, location } = useHistory();
+
   return (
     <>
       <Header back />
@@ -103,11 +87,21 @@ export default function SubMain() {
           className="overflow-y-auto divide-y-2 divide-gray-200 px-4"
           ref={fillRemainHeight}
         >
-          {map(toRecord)(transactions)}
+          {transactions.map((transaction) => (
+            <Link
+              key={transaction.id}
+              to={`${location.pathname}/${transaction.id}`}
+              className="block"
+            >
+              <Record {...transaction} />
+            </Link>
+          ))}
         </div>
       </main>
 
-      <BottomDrawer />
+      <Modal open={location.hash === "#custom"} onClickAway={goBack}>
+        <BottomDrawer onClose={goBack} />
+      </Modal>
     </>
   );
 }

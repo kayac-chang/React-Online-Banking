@@ -1,4 +1,5 @@
 import { ReactNode, MouseEvent } from "react";
+import { Link } from "react-router-dom";
 
 type Props = {
   href: string;
@@ -15,14 +16,14 @@ export default function Tab({
   onClick,
 }: Props) {
   return (
-    <a
-      href={href}
+    <Link
+      to={href}
       aria-controls={ariaControls}
       className={className}
       onClick={onClick}
       role="tab"
     >
       {label}
-    </a>
+    </Link>
   );
 }
