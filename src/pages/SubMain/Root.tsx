@@ -1,7 +1,7 @@
 import { Transaction, Error } from "types";
 import { fillRemainHeight } from "utils";
 import { Link, useHistory } from "react-router-dom";
-import { useQuery, useInfiniteQuery } from "react-query";
+import { useQuery } from "react-query";
 import clsx from "clsx";
 
 import { Modal, Avatar } from "components/atoms";
