@@ -48,13 +48,11 @@ export function initMockServer() {
     routes() {
       this.get("/transactions", function (this: any, schema, request) {
         function condition() {
-          if (request.queryParams.month) {
+          if (request.queryParams.filter) {
             return schema.where("transaction", (transaction) => {
-              const month = dayjs()
-                .subtract(1, "y")
-                .month(Number(request.queryParams.month || 12) - 1);
+              const filter = dayjs(request.queryParams.filter, "YYYY-MM");
 
-              return dayjs(transaction.date).isSame(month, "month");
+              return dayjs(transaction.date).isSame(filter, "month");
             });
           }
 

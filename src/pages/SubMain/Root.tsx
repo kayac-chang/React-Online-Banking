@@ -1,7 +1,7 @@
 import { Transaction, Error } from "types";
 import { fillRemainHeight } from "utils";
 import { Link, useHistory } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useQuery, useInfiniteQuery } from "react-query";
 import clsx from "clsx";
 
 import { Modal, Avatar } from "components/atoms";
@@ -15,6 +15,7 @@ import { Header } from "components/organisms";
 import { BsSearch } from "react-icons/bs";
 import { FiInfo } from "react-icons/fi";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import dayjs from "dayjs";
 
 type AccountProps = {
   balance: string;
@@ -76,37 +77,37 @@ function Record(props: Transaction) {
 }
 
 const filters = [
-  {
-    to: "?filter=12",
-    label: "12月",
-  },
-  {
-    to: "?filter=11",
-    label: "11月",
-  },
-  {
-    to: "?filter=10",
-    label: "10月",
-  },
+  ...[
+    dayjs(),
+    dayjs().subtract(1, "month"),
+    dayjs().subtract(2, "month"),
+    //
+  ].map((date) => ({
+    to: `?filter=${date.format("YYYY-MM")}`,
+    label: `${date.format("MM")}月`,
+  })),
   {
     to: "#custom",
     label: "自訂區間",
   },
 ];
 
-function fetchTransactions() {
-  return fetch("/api/transactions?month=12")
+const fetchTransactions = (filter = "") =>
+  fetch(`/api/transactions${filter}`)
     .then((res) => res.json())
     .then(({ transactions }) => transactions);
-}
 
 export default function SubMain() {
-  const { goBack, location } = useHistory();
+  const { goBack, location, push } = useHistory();
+
   const { status, data: transactions, error } = useQuery<Transaction[], Error>(
-    "transaction",
-    fetchTransactions
+    ["transactions", location.search],
+    () => fetchTransactions(location.search)
   );
 
+  if (!location.search) {
+    push(filters[0].to);
+  }
   console.log({ status, transactions, error });
 
   return (
