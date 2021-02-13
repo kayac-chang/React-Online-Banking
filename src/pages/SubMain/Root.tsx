@@ -95,7 +95,7 @@ const filters = [
 ];
 
 function fetchTransactions() {
-  return fetch("/api/transactions")
+  return fetch("/api/transactions?month=12")
     .then((res) => res.json())
     .then(({ transactions }) => transactions);
 }

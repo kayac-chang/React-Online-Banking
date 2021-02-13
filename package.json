@@ -5,7 +5,6 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
     "clsx": "^1.1.1",
-    "dayjs": "^1.9.8",
     "ramda": "^0.27.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -72,6 +71,7 @@
     "react-scripts": "4.0.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "dayjs": "^1.9.8"
   }
 }
