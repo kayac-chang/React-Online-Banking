@@ -4,10 +4,9 @@ export interface Avatar {
   name: string;
 }
 
+export interface Error {}
+
 export interface Transaction extends Avatar {
-  id: string;
-  name: string;
-  img: string;
   date: string;
   description: string;
   amount: string;

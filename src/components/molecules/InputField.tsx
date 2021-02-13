@@ -1,10 +1,22 @@
 import clsx from "clsx";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 import { RenderProps } from "../atoms";
 import type { RenderPropsChildren } from "../atoms/RenderProps";
 
-import useFocus from "hooks/useFocus";
+function useFocus(initial: boolean = false) {
+  const [focus, setFocus] = useState(initial);
+
+  function onFocus() {
+    setFocus(true);
+  }
+
+  function onBlur() {
+    setFocus(false);
+  }
+
+  return { focus, onFocus, onBlur };
+}
 
 type InputFieldProps = {
   type: string;

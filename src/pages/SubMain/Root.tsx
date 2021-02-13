@@ -1,17 +1,12 @@
-import { Avatar, Transaction } from "types";
+import { Transaction, Error } from "types";
 import { fillRemainHeight } from "utils";
 import { Link, useHistory } from "react-router-dom";
+import { useQuery } from "react-query";
 import clsx from "clsx";
 
-import { Modal } from "components/atoms";
-import {
-  AvatarGroup,
-  InputFieldWithPlaceholder,
-  BottomDrawer,
-} from "components/molecules";
+import { Modal, Avatar } from "components/atoms";
+import { InputFieldWithPlaceholder, BottomDrawer } from "components/molecules";
 import { Header } from "components/organisms";
-
-import transactions from "mocks/transactions";
 
 import { BsSearch } from "react-icons/bs";
 import { FiInfo } from "react-icons/fi";
@@ -50,31 +45,29 @@ function Account({ balance, name, id }: AccountProps) {
   );
 }
 
-interface RecordProps extends Avatar, Transaction {
-  className?: string;
-  date: string;
-}
-function Record(props: RecordProps) {
-  const { name, img, className, date, description, amount, balance } = props;
+function Record(props: Transaction) {
+  const { name, img, date, description, amount, balance } = props;
 
   return (
-    <AvatarGroup name={name} img={img} className={className}>
-      <div className="flex-1 flex text-sm">
-        <section className="flex-1 flex flex-col justify-center">
-          <span className="text-xs">
-            {date} - {name}
-          </span>
-
-          <p>{description}</p>
-        </section>
-
-        <section className="flex flex-col justify-center text-right">
-          <h2 className="text-2xl">{amount}</h2>
-
-          <span className="text-xs">{balance}</span>
-        </section>
+    <div className="flex items-center py-1">
+      <div className="w-20 flex items-center">
+        <Avatar name={name} img={img} />
       </div>
-    </AvatarGroup>
+
+      <div className="w-40">
+        <span className="text-xs">
+          {date} - {name}
+        </span>
+
+        <p className="truncate">{description}</p>
+      </div>
+
+      <div className="flex-1 text-right">
+        <h2 className="text-2xl">{amount}</h2>
+
+        <span className="text-xs">{balance}</span>
+      </div>
+    </div>
   );
 }
 
@@ -97,14 +90,26 @@ const filters = [
   },
 ];
 
+function fetchTransactions() {
+  return fetch("/api/transactions")
+    .then((res) => res.json())
+    .then(({ transactions }) => transactions);
+}
+
 export default function SubMain() {
   const { goBack, location } = useHistory();
+  const { status, data, error } = useQuery<Transaction[], Error>(
+    "transaction",
+    fetchTransactions
+  );
+
+  console.log({ status, data, error });
 
   return (
     <>
       <Header back />
 
-      <main className="space-y-2 px-4">
+      <main className="space-y-2 mx-4">
         <Account
           balance="$320,000,000"
           name="皇太后的金庫"
@@ -137,19 +142,18 @@ export default function SubMain() {
           }
         />
 
-        <div
-          className="overflow-y-auto divide-y-2 divide-gray-200 pr-2"
-          ref={fillRemainHeight}
-        >
-          {transactions.map((transaction) => (
-            <Link
-              key={transaction.id}
-              to={`${location.pathname}/${transaction.id}`}
-              className="block"
-            >
-              <Record {...transaction} />
-            </Link>
-          ))}
+        <div ref={fillRemainHeight}>
+          <div className="overflow-y-auto divide-y-2 divide-gray-200">
+            {data?.map((transaction) => (
+              <Link
+                key={transaction.id}
+                to={`${location.pathname}/${transaction.id}`}
+                className="block"
+              >
+                <Record {...transaction} />
+              </Link>
+            ))}
+          </div>
         </div>
       </main>
 

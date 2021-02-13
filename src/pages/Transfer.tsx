@@ -9,7 +9,6 @@ import { AvatarGroup } from "components/molecules";
 import { Header } from "components/organisms";
 
 import friends from "mocks/friends";
-import history from "mocks/transactions";
 
 type RecordProps = {
   className?: string;
@@ -82,7 +81,7 @@ export default function Transfer() {
         <ArticleHeader title="最近紀錄" />
 
         <div className="divide-y overflow-y-auto" ref={fillRemainHeight}>
-          {map(toRecord)(history)}
+          {/* {map(toRecord)(history)} */}
         </div>
       </article>
     </>
