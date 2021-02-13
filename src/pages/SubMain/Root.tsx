@@ -5,7 +5,11 @@ import { useQuery } from "react-query";
 import clsx from "clsx";
 
 import { Modal, Avatar } from "components/atoms";
-import { InputFieldWithPlaceholder, BottomDrawer } from "components/molecules";
+import {
+  InputFieldWithPlaceholder,
+  BottomDrawer,
+  List,
+} from "components/molecules";
 import { Header } from "components/organisms";
 
 import { BsSearch } from "react-icons/bs";
@@ -98,12 +102,12 @@ function fetchTransactions() {
 
 export default function SubMain() {
   const { goBack, location } = useHistory();
-  const { status, data, error } = useQuery<Transaction[], Error>(
+  const { status, data: transactions, error } = useQuery<Transaction[], Error>(
     "transaction",
     fetchTransactions
   );
 
-  console.log({ status, data, error });
+  console.log({ status, transactions, error });
 
   return (
     <>
@@ -143,17 +147,18 @@ export default function SubMain() {
         />
 
         <div ref={fillRemainHeight}>
-          <div className="overflow-y-auto divide-y-2 divide-gray-200">
-            {data?.map((transaction) => (
-              <Link
-                key={transaction.id}
-                to={`${location.pathname}/${transaction.id}`}
-                className="block"
-              >
-                <Record {...transaction} />
-              </Link>
-            ))}
-          </div>
+          {transactions && (
+            <List data={transactions}>
+              {(index) => (
+                <Link
+                  key={transactions[index].id}
+                  to={`${location.pathname}/${transactions[index].id}`}
+                >
+                  <Record {...transactions[index]} />
+                </Link>
+              )}
+            </List>
+          )}
         </div>
       </main>
 

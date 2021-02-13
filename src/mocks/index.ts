@@ -38,7 +38,10 @@ export function initMockServer() {
     },
 
     seeds(server) {
-      server.createList("transaction", faker.random.number(100));
+      server.createList(
+        "transaction",
+        faker.random.number({ min: 1000, max: 2000 })
+      );
     },
 
     routes() {
