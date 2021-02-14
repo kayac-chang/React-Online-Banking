@@ -1,6 +1,6 @@
 import { Transaction, Error } from "types";
 import { fillRemainHeight } from "utils";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 import { useQuery } from "react-query";
 import clsx from "clsx";
 
@@ -98,7 +98,7 @@ const fetchTransactions = (filter = "") =>
     .then(({ transactions }) => transactions);
 
 export default function SubMain() {
-  const { goBack, location, push } = useHistory();
+  const { goBack, location } = useHistory();
 
   const { status, data: transactions, error } = useQuery<Transaction[], Error>(
     ["transactions", location.search],
@@ -106,8 +106,16 @@ export default function SubMain() {
   );
 
   if (!location.search) {
-    push(filters[0].to);
+    return (
+      <Redirect
+        to={{
+          pathname: location.pathname,
+          search: filters[0].to,
+        }}
+      />
+    );
   }
+
   console.log({ status, transactions, error });
 
   return (
