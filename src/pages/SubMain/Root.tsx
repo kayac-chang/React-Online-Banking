@@ -83,7 +83,7 @@ const filters = [
     dayjs().subtract(2, "month"),
     //
   ].map((date) => ({
-    to: `?filter=${date.format("YYYY-MM")}`,
+    to: `?page[before]=${date.format("YYYY-MM")}&page[size]=100`,
     label: `${date.format("MM")}月`,
   })),
   {

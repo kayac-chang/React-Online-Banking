@@ -1,7 +1,11 @@
 import { createServer, Model, Factory, RestSerializer } from "miragejs";
 import faker from "faker";
 import dayjs from "dayjs";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import { Transaction } from "types";
+import { isEmpty } from "ramda";
+
+dayjs.extend(isSameOrBefore);
 
 function randomThumb() {
   const gender = ["women", "men"][faker.random.number() % 2];
@@ -41,18 +45,21 @@ export function initMockServer() {
     seeds(server) {
       server.createList(
         "transaction",
-        faker.random.number({ min: 100, max: 200 })
+        faker.random.number({ min: 200, max: 500 })
       );
     },
 
     routes() {
       this.get("/transactions", function (this: any, schema, request) {
         function condition() {
-          if (request.queryParams.filter) {
-            return schema.where("transaction", (transaction) => {
-              const filter = dayjs(request.queryParams.filter, "YYYY-MM");
+          if (!isEmpty(request.queryParams)) {
+            const before = dayjs(
+              request.queryParams["page[before]"],
+              "YYYY-MM"
+            );
 
-              return dayjs(transaction.date).isSame(filter, "month");
+            return schema.where("transaction", (transaction) => {
+              return dayjs(transaction.date).isSameOrBefore(before, "month");
             });
           }
 
@@ -60,8 +67,14 @@ export function initMockServer() {
         }
 
         const { transactions } = this.serialize(condition());
+        const size = Number(request.queryParams["page[size]"]);
+
+        const res = transactions
+          .slice(0, size)
+          .sort((a: any, b: any) => b.date - a.date);
+
         return {
-          transactions: formatDate(transactions),
+          transactions: formatDate(res),
         };
       });
     },
