@@ -51,30 +51,36 @@ export function initMockServer() {
 
     routes() {
       this.get("/transactions", function (this: any, schema, request) {
-        function condition() {
-          if (!isEmpty(request.queryParams)) {
-            const before = dayjs(
-              request.queryParams["page[before]"],
-              "YYYY-MM"
-            );
+        // paginate
+        if (!isEmpty(request.queryParams)) {
+          const { transactions } = this.serialize(schema.all("transaction"));
 
-            return schema.where("transaction", (transaction) => {
-              return dayjs(transaction.date).isSameOrBefore(before, "month");
-            });
-          }
+          const number = Number(request.queryParams["page[number]"] || 0);
+          const size = Number(request.queryParams["page[size]"] || 0);
 
-          return schema.all("transaction");
+          const minIndex = number;
+          const maxIndex = number + size;
+
+          const results = transactions
+            .sort((a: any, b: any) => b.date - a.date)
+            .slice(minIndex, maxIndex);
+
+          const next =
+            maxIndex <= transactions.length &&
+            `/api/transactions?page[number]=${maxIndex}&page[size]=${size}`;
+
+          return {
+            data: formatDate(results),
+            links: {
+              next,
+            },
+          };
         }
 
-        const { transactions } = this.serialize(condition());
-        const size = Number(request.queryParams["page[size]"]);
-
-        const res = transactions
-          .slice(0, size)
-          .sort((a: any, b: any) => b.date - a.date);
-
+        // default
+        const { transactions } = this.serialize(schema.all("transaction"));
         return {
-          transactions: formatDate(res),
+          data: formatDate(transactions),
         };
       });
     },

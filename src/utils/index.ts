@@ -16,3 +16,7 @@ export function fillRemainHeight(el: HTMLDivElement) {
 
   el.style.height = viewport.height - top + "px";
 }
+
+export function toURL(url: string) {
+  return new URL(url, window.location.origin);
+}

@@ -1,15 +1,15 @@
 import { useRef, ReactNode } from "react";
 import { useVirtual } from "react-virtual";
 
-type Props<T> = {
-  data: T[];
+type ListProps = {
+  size: number;
   children: (index: number) => ReactNode;
 };
-export function List<T>({ data, children }: Props<T>) {
-  const ref = useRef<HTMLDivElement>(null);
+export function List({ size, children }: ListProps) {
+  const ref = useRef(null);
 
   const { virtualItems, totalSize } = useVirtual({
-    size: data.length,
+    size,
     parentRef: ref,
   });
 

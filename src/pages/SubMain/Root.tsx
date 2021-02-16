@@ -1,7 +1,7 @@
-import { Transaction, Error } from "types";
-import { fillRemainHeight } from "utils";
-import { Link, useHistory, Redirect } from "react-router-dom";
-import { useQuery } from "react-query";
+import { Transaction } from "types";
+import { fillRemainHeight, toURL } from "utils";
+import { Link, useHistory } from "react-router-dom";
+import { useInfiniteQuery } from "react-query";
 import clsx from "clsx";
 
 import { Modal, Avatar } from "components/atoms";
@@ -16,6 +16,7 @@ import { BsSearch } from "react-icons/bs";
 import { FiInfo } from "react-icons/fi";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import dayjs from "dayjs";
+import { fetchTransactions } from "api";
 
 type AccountProps = {
   balance: string;
@@ -76,6 +77,50 @@ function Record(props: Transaction) {
   );
 }
 
+function TransactionList() {
+  const {
+    status,
+    data,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery(
+    "transactions",
+    ({ pageParam }) => fetchTransactions({ size: 100, number: pageParam }),
+    {
+      getNextPageParam: (lastPage) => {
+        const next = lastPage.links.next;
+
+        return next && toURL(next).searchParams.get("page[number]");
+      },
+      select: (data) => ({
+        ...data,
+        pages: data.pages.flatMap((page) => page.data),
+      }),
+    }
+  );
+
+  if (status === "loading" || !data) {
+    return <></>;
+  }
+
+  const transactions = data.pages;
+
+  return (
+    <List size={transactions.length + (hasNextPage ? 1 : 0)}>
+      {(index) =>
+        index === transactions.length ? (
+          <div ref={(el) => el && !isFetchingNextPage && fetchNextPage()}>
+            loading ...
+          </div>
+        ) : (
+          <Record {...transactions[index]} />
+        )
+      }
+    </List>
+  );
+}
+
 const filters = [
   ...[
     dayjs(),
@@ -83,7 +128,7 @@ const filters = [
     dayjs().subtract(2, "month"),
     //
   ].map((date) => ({
-    to: `?page[before]=${date.format("YYYY-MM")}&page[size]=100`,
+    to: `?filter=${date.format("YYYY-MM")}`,
     label: `${date.format("MM")}月`,
   })),
   {
@@ -92,31 +137,8 @@ const filters = [
   },
 ];
 
-const fetchTransactions = (filter = "") =>
-  fetch(`/api/transactions${filter}`)
-    .then((res) => res.json())
-    .then(({ transactions }) => transactions);
-
 export default function SubMain() {
   const { goBack, location } = useHistory();
-
-  const { status, data: transactions, error } = useQuery<Transaction[], Error>(
-    ["transactions", location.search],
-    () => fetchTransactions(location.search)
-  );
-
-  if (!location.search) {
-    return (
-      <Redirect
-        to={{
-          pathname: location.pathname,
-          search: filters[0].to,
-        }}
-      />
-    );
-  }
-
-  console.log({ status, transactions, error });
 
   return (
     <>
@@ -156,18 +178,7 @@ export default function SubMain() {
         />
 
         <div ref={fillRemainHeight}>
-          {transactions && (
-            <List data={transactions}>
-              {(index) => (
-                <Link
-                  key={transactions[index].id}
-                  to={`${location.pathname}/${transactions[index].id}`}
-                >
-                  <Record {...transactions[index]} />
-                </Link>
-              )}
-            </List>
-          )}
+          <TransactionList />
         </div>
       </main>
 
