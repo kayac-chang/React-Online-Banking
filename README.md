@@ -6,12 +6,6 @@ _You’ll need to have Node >= 10 on your local development machine_ (but it’s
 
 You can use _nvm_ (macOS/Linux) or _nvm-windows_ to switch Node versions between different projects.
 
-## Remote
-
-- origin https://github.com/lexionlu-design/bankee-app.git
-
-- release https://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/Main_WebView
-
 ## Todo List
 
 - [ ] Overview
