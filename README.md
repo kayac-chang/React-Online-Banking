@@ -1,4 +1,4 @@
-# Bankee
+# Banking App Example
 
 ## Requirement
 
